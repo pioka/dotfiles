@@ -1,0 +1,15 @@
+[alias]
+	logstat = log --stat --graph --date=iso --decorate=short --pretty='format:──── %Creset%C(yellow)[%h] %s%Creset%C(magenta)%d%n%Creset%C(cyan)%cn <%ce>%n%Creset%C(blue)%cd%n'
+[core]
+	editor = vim
+	autocrlf = input
+	commentChar = ";"
+[merge]
+	ff = false
+[pull]
+	rebase = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
