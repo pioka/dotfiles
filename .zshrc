@@ -49,6 +49,10 @@ precmd() {
 }
 
 
+# Force clear git global user config
+git config --global --unset user.name
+git config --global --unset user.email
+
 # AutoSuggestions
 if [ ! -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
