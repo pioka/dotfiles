@@ -2,13 +2,16 @@
 
 FILES=`cat << EOS
 .gitconfig
-.npmrc
 .vimrc
-.zshenv
 .zshrc
 EOS
 `
 
+DIST_DIR=`pwd`/.dist
+
+mkdir -p $DIST_DIR
+
 for f in $FILES; do
-  ln -sf `pwd`/$f $HOME/$f
+  cp $f $DIST_DIR/$f
+  ln -sf $DIST_DIR/$f $HOME/$f
 done
