@@ -46,6 +46,7 @@ PROMPT='
 precmd() {
   git-auto-fetch
   vcs_info
+  print -Pn "\e]0;%n@%M:%~\a"
 }
 
 
