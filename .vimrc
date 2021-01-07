@@ -53,6 +53,10 @@ set backspace=indent,eol,start
 set cursorline
 set number
 
+" 言語ごとの設定
+autocmd BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
+autocmd FileType make setlocal noexpandtab
+
 " カラースキーム
 colorscheme molokai
 syntax on
