@@ -50,6 +50,8 @@ set laststatus=2
 set hlsearch
 set termguicolors
 set backspace=indent,eol,start
+set cursorline
+set number
 
 " カラースキーム
 colorscheme molokai
