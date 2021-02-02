@@ -1,6 +1,6 @@
 # Aliases
-alias ls='ls --color=auto'
-#alias ls='ls -G' # for Mac
+alias ls='ls -h --color=auto'
+#alias ls='ls -Gh' # for Mac
 alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
