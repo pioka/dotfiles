@@ -5,6 +5,7 @@ alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
 alias p='ping -c 10 -i 0.2'
+alias vim='nvim'
 
 
 # History
