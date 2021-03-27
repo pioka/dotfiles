@@ -4,7 +4,6 @@ alias ls='ls -h --color=auto'
 alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
-alias gcc='gcc -Wall'
 alias p='ping -c 10 -i 0.2'
 
 
@@ -15,13 +14,6 @@ setopt hist_ignore_dups
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=10000
-
-
-# Directory Movement
-setopt auto_cd
-setopt auto_pushd
-setopt pushd_ignore_dups
-DIRSTACKSIZE=8
 
 
 # Completion
@@ -50,10 +42,6 @@ precmd() {
   print -Pn "\e]0;%n@%M:%~\a"
 }
 
-
-# Force clear git global user config
-git config --global --unset user.name
-git config --global --unset user.email
 
 # AutoSuggestions
 if [ ! -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
