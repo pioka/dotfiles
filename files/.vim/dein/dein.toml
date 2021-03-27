@@ -1,0 +1,38 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  set noshowmode
+  let g:lightline = 
+  \ {
+  \   'active': {
+  \   'left': [['mode', 'paste'],
+  \     ['gitbranch', 'readonly', 'filename', 'modified']]
+  \   },
+  \   'component_function': {
+  \     'gitbranch': 'fugitive#head'
+  \   }
+  \ }
+'''
+
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+  colorscheme molokai
+  syntax on
+
+  " 括弧が見づらいので変える
+  if g:colors_name == "molokai"
+    hi MatchParen ctermfg=208 ctermbg=233 gui=bold
+    hi MatchParen guifg=#FD971F guibg=#000000 gui=bold
+  endif
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
