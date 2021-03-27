@@ -28,6 +28,10 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 " 自前キーマップ
 noremap <Space>nh :noh<CR>
+noremap <Space>nt :NERDTreeToggle<CR>
+noremap <Space>e :tabe 
+noremap <Space>h ^
+noremap <Space>l $
 
 " いろいろ
 set tabstop=2
