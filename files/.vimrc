@@ -27,11 +27,14 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 
 " 自前キーマップ
+noremap <Space> <Nop>
 noremap <Space>nh :noh<CR>
 noremap <Space>nt :NERDTreeToggle<CR>
-noremap <Space>e :tabe 
+noremap <Space>t :tabnew \| term<CR><C-w>o
 noremap <Space>h ^
 noremap <Space>l $
+tnoremap <Esc> <C-\><C-n>
+
 
 " いろいろ
 set tabstop=2
