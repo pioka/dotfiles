@@ -26,13 +26,17 @@ endif
 call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 
-" 自前キーマップ
+" キーマップ
+noremap <C-n> <C-w>w
+noremap <C-p> <C-w>W
+noremap t ^
+noremap T $
+
 noremap <Space> <Nop>
 noremap <Space>nh :noh<CR>
-noremap <Space>nt :NERDTreeToggle<CR>
-noremap <Space>t :tabnew \| term<CR><C-w>o
-noremap <Space>h ^
-noremap <Space>l $
+noremap <C-s> :NERDTreeToggle<CR>
+
+noremap <Space>tm :bo split \| resize 16 \| term<CR>
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -40,8 +44,6 @@ tnoremap <Esc> <C-\><C-n>
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set autoindent
-set smartindent
 set laststatus=2
 set hlsearch
 set termguicolors
