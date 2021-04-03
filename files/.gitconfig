@@ -3,7 +3,7 @@
 [user]
 	useConfigOnly = true
 [core]
-	editor = vim
+	editor = nvim
 	autocrlf = input
 	commentChar = ";"
 [merge]
