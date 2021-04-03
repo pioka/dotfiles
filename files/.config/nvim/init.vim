@@ -1,7 +1,7 @@
 " deinセットアップ
-let s:dein_path = expand('~/.nvim/dein')
-let s:dein_repo_path = expand('~/.nvim/dein/repos/github.com/Shougo/dein.vim')
-let s:dein_toml_path = expand('~/.nvim/dein/dein.toml')
+let s:dein_path       = expand('~/.local/share/dein.vim')
+let s:dein_repo_path  = expand('~/.local/share/dein.vim/repos/github.com/Shougo/dein.vim')
+let s:dein_toml_path  = expand('~/.config/dein.vim/dein.toml')
 
 if !isdirectory(s:dein_repo_path)
   execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_path
