@@ -1,11 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -46,7 +41,4 @@ repo = 'cohama/lexima.vim'
 repo = 'preservim/nerdtree'
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
+repo = 'neoclide/coc.nvim'

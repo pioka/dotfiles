@@ -8,6 +8,7 @@ if !isdirectory(s:dein_repo_path)
 endif
 
 execute 'set runtimepath+=' . s:dein_repo_path
+let g:dein#auto_recache = 1
 
 "" プラグイン読み込み
 if dein#load_state(s:dein_path)
