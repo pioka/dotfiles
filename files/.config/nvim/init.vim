@@ -51,6 +51,7 @@ set termguicolors
 set backspace=indent,eol,start
 set cursorline
 set number
+set clipboard+=unnamed
 
 
 " 言語カスタム系
