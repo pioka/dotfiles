@@ -1,9 +1,3 @@
-# Open tmux
-if [ $- != "*i*" -a -z "$TMUX" ]; then
-  tmux attach || tmux new && exit
-fi
-
-
 # Aliases
 alias ls='ls -h --color=auto'
 #alias ls='ls -Gh' # for Mac
