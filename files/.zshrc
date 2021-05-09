@@ -24,6 +24,7 @@ zstyle ':completion:*:default' menu select=1
 
 
 # Display
+export PROMPT_EOL_MARK=''
 autoload -Uz vcs_info
 setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
