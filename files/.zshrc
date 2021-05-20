@@ -1,4 +1,4 @@
-# Aliases
+# Aliases & Functions
 alias ls='ls -h --color=auto'
 #alias ls='ls -Gh' # for Mac
 alias l='ls -CF'
@@ -7,6 +7,9 @@ alias la='ls -A'
 alias p='ping -c 10 -i 0.2'
 alias vim='nvim'
 
+function show-https-cert() {
+  openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
+}
 
 # History
 setopt extended_history
