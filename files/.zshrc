@@ -48,6 +48,9 @@ precmd() {
 }
 
 
+# Add path
+path+=~/.local/bin
+
 # AutoSuggestions
 if [ ! -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
