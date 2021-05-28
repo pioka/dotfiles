@@ -37,8 +37,10 @@ zstyle ':vcs_info:svn:*' formats '[%r > r%i%c%u%m]'
 zstyle ':vcs_info:git:*' formats '[%r > %b%c%u%m]'
 zstyle ':vcs_info:git:*' actionformats '[%r > %b%c%u<%B%F{red}%a%f%%b>%m]'
 
+# `export PROMPT_HOSTNAME_COLOR=xxx`
+# to change hostname color. default is cyan.
 PROMPT='
-[%n@%F{cyan}%B%m%b%f:%F{blue}%B%~%b%f] ${vcs_info_msg_0_}
+[%n@%F{${PROMPT_HOSTNAME_COLOR:-cyan}}%B%m%b%f:%F{blue}%B%~%b%f] ${vcs_info_msg_0_}
 %# '
 
 precmd() {
