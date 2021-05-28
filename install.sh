@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TARGET_FILES=`find ./files -type f,l`
+TARGET_FILES=`find ./files -type f`
 
 for src in $TARGET_FILES; do
   dest="$HOME/`echo $src | sed "s/^.\/files\///" `"
