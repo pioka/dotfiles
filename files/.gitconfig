@@ -8,6 +8,7 @@
 [core]
 	editor = nvim
 	autocrlf = input
+	quotepath = false
 	commentChar = ";"
 [merge]
 	ff = false
