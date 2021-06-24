@@ -11,6 +11,9 @@ function show-https-cert() {
   openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
 }
 
+# Keymap
+bindkey -e
+
 # History
 setopt extended_history
 setopt share_history
