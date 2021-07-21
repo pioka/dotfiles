@@ -28,16 +28,21 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 
 " キーマップ
+"" 次/前のウィンドウ
 noremap <C-n> <C-w>w
 noremap <C-p> <C-w>W
+
+"" 行頭/行末へ移動
 noremap t ^
 noremap T $
 
-noremap <Space> <Nop>
-noremap <Space>nh :noh<CR>
+"" 検索ハイライト解除
+noremap <BSlash> :noh<CR>
+
+"" NERDTree表示切り替え
 noremap <C-s> :NERDTreeToggle<CR>
 
-noremap <Space>tm :bo split \| resize 16 \| term<CR>
+"" Escでノーマルモードへ
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -58,5 +63,5 @@ set clipboard+=unnamed
 "" Vagrantfileはrubyのシンタックスを使用
 autocmd BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 
-"" Makefileは例外的にハードタブを使用
+"" Makefileにはハードタブを使う
 autocmd FileType make setlocal noexpandtab
