@@ -5,6 +5,8 @@ alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
 alias vim='nvim'
+alias view='nvim -R'
+alias vimdiff='nvim -d'
 alias p='ping -c 10 -i 0.2'
 alias t='tmux attach || tmux'
 
