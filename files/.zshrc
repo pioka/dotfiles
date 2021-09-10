@@ -74,7 +74,7 @@ source $HOME/.asdf/asdf.sh
 
 # neovim
 if [ ! -e ~/.local/bin/nvim ]; then
-  mkdir ~/.local/bin
+  mkdir -p ~/.local/bin
   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
   chmod +x ~/.local/bin/nvim
 fi
@@ -83,8 +83,8 @@ fi
 node -v > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   asdf plugin-add nodejs
-  asdf install nodejs list
-  asdf global nodejs
+  asdf install nodejs lts
+  asdf global nodejs lts
 fi
 
 # git: Display ahead/behind
