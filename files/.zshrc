@@ -14,7 +14,7 @@ function show-https-cert() {
   openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
 }
 
-# Keymap
+# Keymap: Emacs
 bindkey -e
 
 # History
@@ -71,6 +71,21 @@ if [ ! -e ~/.asdf/asdf.sh ]; then
 fi
 source $HOME/.asdf/asdf.sh
 
+
+# neovim
+if [ ! -e ~/.local/bin/nvim ]; then
+  mkdir ~/.local/bin
+  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
+  chmod +x ~/.local/bin/nvim
+fi
+
+# nodejs (for neovim)
+node -v > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  asdf plugin-add nodejs
+  asdf install nodejs list
+  asdf global nodejs
+fi
 
 # git: Display ahead/behind
 zstyle ':vcs_info:git*+set-message:*' hooks git-st
