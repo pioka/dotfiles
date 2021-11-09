@@ -57,6 +57,7 @@ set backspace=indent,eol,start
 set cursorline
 set number
 set clipboard+=unnamed
+set diffopt+=algorithm:histogram
 
 
 " 言語カスタム系
