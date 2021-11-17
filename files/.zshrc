@@ -43,51 +43,21 @@ zstyle ':vcs_info:svn:*' formats '[%r > r%i%c%u%m]'
 zstyle ':vcs_info:git:*' formats '[%r > %b%c%u%m]'
 zstyle ':vcs_info:git:*' actionformats '[%r > %b%c%u<%B%F{red}%a%f%%b>%m]'
 
-# `export PROMPT_HOSTNAME_COLOR=xxx`
-# to change hostname color. default is cyan.
+## `export PROMPT_HOSTNAME_COLOR=xxx`
+## to change hostname color. default is cyan.
 PROMPT='
 [%n@%F{${PROMPT_HOSTNAME_COLOR:-cyan}}%B%m%b%f:%F{blue}%B%~%b%f] ${vcs_info_msg_0_}
 %# '
 
+
+# Hooks
 precmd() {
   git-auto-fetch
   vcs_info
   print -Pn "\e]0;%n@%M:%~\a"
 }
 
-
-# Add path
-path+=~/.local/bin
-
-# AutoSuggestions
-if [ ! -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-fi
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# asdf
-if [ ! -e ~/.asdf/asdf.sh ]; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b v0.8.0
-fi
-source $HOME/.asdf/asdf.sh
-
-
-# neovim
-if [ ! -e ~/.local/bin/nvim ]; then
-  mkdir -p ~/.local/bin
-  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
-  chmod +x ~/.local/bin/nvim
-fi
-
-# nodejs (for neovim)
-node -v > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-  asdf plugin-add nodejs
-  asdf install nodejs lts
-  asdf global nodejs lts
-fi
-
-# git: Display ahead/behind
+## git: Display ahead/behind
 zstyle ':vcs_info:git*+set-message:*' hooks git-st
 function +vi-git-st() {
     local ahead behind
@@ -98,8 +68,8 @@ function +vi-git-st() {
     (( $behind+$ahead )) && hook_com[misc]+=" (-${behind}/+${ahead})"
 }
 
-# git: Auto fetch
-# `touch .git/NO_AUTO_FETCH` to disable
+## git: Auto fetch
+## `touch .git/NO_AUTO_FETCH` to disable
 function git-auto-fetch() {
   FETCH_INTERVAL_SEC=3600
   
@@ -109,3 +79,36 @@ function git-auto-fetch() {
   (( `date +%s` - `date -r $gitdir/FETCH_LOG +%s 2>/dev/null || echo 0` > $FETCH_INTERVAL_SEC )) && \
     git fetch --all | tee $gitdir/FETCH_LOG 
 }
+
+
+# External Plugin & Binary
+path+=~/.local/bin
+
+function install-my-requirements() {
+  mkdir -p ~/.local/bin
+
+  ## zsh-auto-suggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+  ## asdf
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b v0.8.0
+
+  ## neovim
+  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
+  chmod +x ~/.local/bin/nvim
+
+  ## nodejs (for nvim)
+  asdf plugin-add nodejs
+  asdf install nodejs lts
+  asdf global nodejs lts
+}
+
+## load zsh-auto-suggestions
+if [ -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+## load asdf
+if [ -e ~/.asdf/asdf.sh ]; then
+  source ~/.asdf/asdf.sh
+fi
