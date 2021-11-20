@@ -8,7 +8,6 @@ if !isdirectory(s:dein_repo_path)
 endif
 
 execute 'set runtimepath+=' . s:dein_repo_path
-let g:dein#auto_recache = 1
 
 "" プラグイン読み込み
 if dein#load_state(s:dein_path)
@@ -24,8 +23,10 @@ if dein#check_install()
 endif
 
 "" 使ってないプラグインは消す
-call map(dein#check_clean(), "delete(v:val, 'rf')")
-
+if len(dein#check_clean()) != 0
+  call map(dein#check_clean(), "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
 
 " キーマップ
 "" 次/前のウィンドウ
@@ -42,7 +43,7 @@ noremap <BSlash> :noh<CR>
 "" NERDTree表示切り替え
 noremap <C-s> :NERDTreeToggle<CR>
 
-"" Escでノーマルモードへ
+"" Terminalモード時、Escでノーマルモードへ
 tnoremap <Esc> <C-\><C-n>
 
 
