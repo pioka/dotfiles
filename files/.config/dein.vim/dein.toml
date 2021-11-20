@@ -44,3 +44,16 @@ repo = 'preservim/nerdtree'
 repo = 'neoclide/coc.nvim'
 merged = 0
 rev = 'origin/release'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  set updatetime=100
+  set signcolumn=no
+  GitGutterLineNrHighlightsEnable
+  hi link GitGutterAddLineNr DiffAdd
+  hi link GitGutterChangeLineNr DiffChange
+  hi link GitGutterChangeDeleteLineNr DiffChange
+  hi link GitGutterDeleteLineNr DiffDelete
+'''
+
