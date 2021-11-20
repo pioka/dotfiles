@@ -82,7 +82,7 @@ function git-auto-fetch() {
 
 
 # External Plugin & Binary
-path+=~/.local/bin
+export PATH=~/.local/bin:$PATH
 
 function install-my-requirements() {
   mkdir -p ~/.local/bin
