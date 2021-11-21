@@ -3,6 +3,7 @@
 
 [alias]
 	logstat = log --stat --graph --date=iso --decorate=short --pretty='format:──── %Creset%C(yellow)[%h] %s%Creset%C(magenta)%d%n%Creset%C(cyan)%cn <%ce>%n%Creset%C(blue)%cd%n'
+	diffs = diff --staged
 [user]
 	useConfigOnly = true
 [core]
