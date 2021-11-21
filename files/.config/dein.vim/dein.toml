@@ -38,22 +38,26 @@ repo = 'tpope/vim-fugitive'
 repo = 'cohama/lexima.vim'
 
 [[plugins]]
-repo = 'preservim/nerdtree'
+repo = 'lambdalisue/fern.vim'
+hook_add = '''
+  let g:fern#default_hidden = 1
+
+  function! s:init_fern() abort
+    setlocal nonumber
+    setlocal signcolumn=no
+  endfunction
+
+  augroup fern-custom
+    autocmd!
+    autocmd FileType fern call s:init_fern()
+  augroup END
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 merged = 0
 rev = 'origin/release'
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-  set updatetime=100
-  set signcolumn=no
-  GitGutterLineNrHighlightsEnable
-  hi link GitGutterAddLineNr DiffAdd
-  hi link GitGutterChangeLineNr DiffChange
-  hi link GitGutterChangeDeleteLineNr DiffChange
-  hi link GitGutterDeleteLineNr DiffDelete
-'''
 

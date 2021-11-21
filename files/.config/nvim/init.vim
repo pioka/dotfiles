@@ -29,22 +29,35 @@ if len(dein#check_clean()) != 0
 endif
 
 " キーマップ
-"" 次/前のウィンドウ
-noremap <C-n> <C-w>w
-noremap <C-p> <C-w>W
+let mapleader = "\<Space>"
+
+noremap <Leader>- :split<CR><C-w>w
+noremap <Leader><Bar> :vsplit<CR><C-w>w
+
+"" ウィンドウ/タブ移動
+noremap <Leader>n <C-w>w
+noremap <Leader>p <C-w>W
 
 "" 行頭/行末へ移動
 noremap t ^
 noremap T $
 
 "" 検索ハイライト解除
-noremap <BSlash> :noh<CR>
+noremap <C-_> :noh<CR>
 
-"" NERDTree表示切り替え
-noremap <C-s> :NERDTreeToggle<CR>
-
-"" Terminalモード時、Escでノーマルモードへ
+"" Termモード時、Escでノーマルモードへ
 tnoremap <Esc> <C-\><C-n>
+
+"" Ctrl+Kでノーマルモードへ
+inoremap <C-k> <Esc>
+vnoremap <C-k> <Esc>
+cnoremap <C-k> <C-c>
+
+"" Fern表示切り替え
+noremap <Leader>f :Fern . -reveal=% -drawer -toggle<CR>
+
+"" Gdiff
+noremap <Leader>gd :Gdiffsplit<CR>
 
 
 " いろいろ
@@ -57,6 +70,10 @@ set termguicolors
 set backspace=indent,eol,start
 set cursorline
 set number
+set hidden
+set list
+set listchars=tab:→\ ,eol:↲,trail:･,nbsp:･
+set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
 
@@ -67,3 +84,4 @@ autocmd BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 
 "" Makefileにはハードタブを使う
 autocmd FileType make setlocal noexpandtab
+
