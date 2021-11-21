@@ -28,39 +28,48 @@ if len(dein#check_clean()) != 0
   call dein#recache_runtimepath()
 endif
 
+
 " キーマップ
-let mapleader = "\<Space>"
-
-noremap <Leader>- :split<CR><C-w>w
-noremap <Leader><Bar> :vsplit<CR><C-w>w
-
-"" ウィンドウ/タブ移動
-noremap <Leader>n <C-w>w
-noremap <Leader>p <C-w>W
-
-"" 行頭/行末へ移動
+"" 汎用
+""" 行頭/行末へ移動
 noremap t ^
 noremap T $
 
-"" 検索ハイライト解除
-noremap <C-_> :noh<CR>
-
-"" Termモード時、Escでノーマルモードへ
+""" Termモード時、Escでノーマルモードへ
 tnoremap <Esc> <C-\><C-n>
 
-"" Ctrl+Kでノーマルモードへ
+""" Ctrl+Kでノーマルモードへ
 inoremap <C-k> <Esc>
 vnoremap <C-k> <Esc>
 cnoremap <C-k> <C-c>
 
-"" Fern表示切り替え
-noremap <Leader>f :Fern . -reveal=% -drawer -toggle<CR>
+""" 検索ハイライト解除
+noremap <C-_> :noh<CR>
 
-"" Gdiff
+"" Leaderキー系独自マップ
+let mapleader = "\<Space>"
+
+""" ウィンドウ操作系
+noremap <Leader>- :split<CR><C-w>w
+noremap <Leader><Bar> :vsplit<CR><C-w>w
+noremap <Leader>n <C-w>w
+noremap <Leader>p <C-w>W
+
+""" QuickFix開閉
+noremap <Leader>co :copen<CR>
+noremap <Leader>cc :cclose<CR>
+
+""" ファイルブラウザ トグル
+noremap <Leader>o :Fern . -reveal=% -drawer -toggle<CR>
+
+""" grep
+noremap <expr> <Leader>f ':sil grep! ' . substitute(expand('<cword>'), '#', '\\#','g') . ' . \| copen'
+
+""" git-diff開く
 noremap <Leader>gd :Gdiffsplit<CR>
 
 
-" いろいろ
+" オプションいろいろ
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -76,6 +85,15 @@ set listchars=tab:→\ ,eol:↲,trail:･,nbsp:･
 set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
+set grepprg=grep\ --exclude-dir=.svn\ --exclude-dir=.git\ -rnI\ $*
+
+
+" 全角スペース強調表示
+augroup HighlightZenkakuSpace
+  autocmd!
+  autocmd VimEnter,ColorScheme * highlight link ZenkakuSpace Error
+  autocmd VimEnter * match ZenkakuSpace /　/
+augroup END
 
 
 " 言語カスタム系
