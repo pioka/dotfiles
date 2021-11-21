@@ -6,7 +6,7 @@
 [user]
 	useConfigOnly = true
 [core]
-	editor = nvim
+	editor = vim
 	autocrlf = input
 	quotepath = false
 	commentChar = ";"

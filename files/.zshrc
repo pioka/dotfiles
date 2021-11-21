@@ -1,14 +1,29 @@
 # Aliases & Functions
-alias ls='ls -h --color=auto'
-#alias ls='ls -Gh' # for Mac
+## general
+alias t='tmux attach || tmux'
+alias p='ping -c 10 -i 0.2'
+
+## ls
+if [ "`uname -s`" = "Darwin" ]; then
+  ### macOS
+  alias ls='ls -Gh'
+else
+  #### Others
+  alias ls='ls -h --color=auto'
+fi
 alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
-alias vim='nvim'
-alias view='nvim -R'
-alias vimdiff='nvim -d'
-alias p='ping -c 10 -i 0.2'
-alias t='tmux attach || tmux'
+
+## vim -> nvim if exists
+if type nvim &> /dev/null; then
+  alias vim='nvim'
+  alias view='nvim -R'
+  alias vimdiff='nvim -d'
+  export GIT_EDITOR=nvim
+else
+  export GIT_EDITOR=vim
+fi
 
 function show-https-cert() {
   openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
@@ -91,13 +106,15 @@ function install-my-requirements() {
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
   ## asdf
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b v0.8.0
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b v0.8.1
 
   ## neovim
-  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
-  chmod +x ~/.local/bin/nvim
+  if [ "`uname -s`" = "Linux" ]; then
+    curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
+    chmod +x ~/.local/bin/nvim
+  fi
 
-  ## nodejs (for nvim)
+  ## nodejs (for coc.nvim)
   asdf plugin-add nodejs
   asdf install nodejs lts
   asdf global nodejs lts
