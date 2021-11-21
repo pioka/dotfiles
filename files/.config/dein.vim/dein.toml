@@ -41,6 +41,7 @@ repo = 'cohama/lexima.vim'
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
   let g:fern#default_hidden = 1
+  let g:fern#default_exclude='^\(\.git\|\.svn\)$'
 
   function! s:init_fern() abort
     setlocal nonumber
