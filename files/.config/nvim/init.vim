@@ -85,8 +85,12 @@ set listchars=tab:→\ ,eol:↲,trail:･,nbsp:･
 set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
-set grepprg=grep\ --exclude-dir=.svn\ --exclude-dir=.git\ -rnI\ $*
 
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --hidden\ --glob='!.git'\ --glob='!.svn'\ $*
+else
+  set grepprg=grep\ --exclude-dir=.svn\ --exclude-dir=.git\ -rnI\ $*
+endif
 
 " 全角スペース強調表示
 augroup HighlightZenkakuSpace
