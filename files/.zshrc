@@ -1,3 +1,6 @@
+# Add PATH
+export PATH=~/.local/bin:$PATH
+
 # Aliases & Functions
 ## general
 alias t='tmux attach || tmux'
@@ -21,8 +24,6 @@ if type nvim &> /dev/null; then
   alias view='nvim -R'
   alias vimdiff='nvim -d'
   export GIT_EDITOR=nvim
-else
-  export GIT_EDITOR=vim
 fi
 
 function show-https-cert() {
@@ -97,8 +98,6 @@ function git-auto-fetch() {
 
 
 # External Plugin & Binary
-export PATH=~/.local/bin:$PATH
-
 function install-my-requirements() {
   mkdir -p ~/.local/bin
 
