@@ -1,6 +1,5 @@
 [include]
-  path = .gitconfig.local
-
+	path = .gitconfig.local
 [alias]
 	logstat = log --stat --graph --date=iso --decorate=short --pretty='format:──── %Creset%C(yellow)[%h] %s%Creset%C(magenta)%d%n%Creset%C(cyan)%cn <%ce>%n%Creset%C(blue)%cd%n'
 	diffs = diff --staged
@@ -15,10 +14,20 @@
 	ff = false
 [pull]
 	rebase = true
+[diff]
+	algorithm = histogram
+
+# git-lfs
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-[diff]
-	algorithm = histogram
+
+# git-delta
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	line-numbers = true
