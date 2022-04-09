@@ -81,7 +81,7 @@ set cursorline
 set number
 set hidden
 set list
-set listchars=tab:→\ ,eol:↲,trail:･,nbsp:･
+set listchars=tab:→\ ,trail:･,nbsp:･
 set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
