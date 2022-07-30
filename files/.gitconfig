@@ -6,7 +6,6 @@
 [user]
 	useConfigOnly = true
 [core]
-	editor = vim
 	autocrlf = input
 	quotepath = false
 	commentChar = ";"
