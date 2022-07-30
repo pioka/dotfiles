@@ -109,13 +109,4 @@ function -print-cmd-end-time() {
   _cmd_running=0
 }
 
-
-## load zsh-auto-suggestions
-if [ -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-## load asdf
-if [ -e ~/.asdf/asdf.sh ]; then
-  source ~/.asdf/asdf.sh
-fi
+source ~/.zsh/init-tools.zsh
