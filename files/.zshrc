@@ -68,6 +68,7 @@ preexec() {
 }
 
 precmd() {
+  local cmd_status=$?
   -print-cmd-end-time
   -git-auto-fetch
   vcs_info
@@ -104,7 +105,7 @@ function -print-cmd-start-time() {
 
 function -print-cmd-end-time() {
   if [ "$_cmd_running" = "1" ]; then
-    echo -e "\e[90m>>> $(date '+%Y-%m-%d %H:%M:%S')\e[m"
+    echo -e "\e[90m>>> $(date '+%Y-%m-%d %H:%M:%S') ($cmd_status)\e[m"
   fi
   _cmd_running=0
 }
