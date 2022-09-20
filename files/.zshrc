@@ -95,7 +95,7 @@ function -git-auto-fetch() {
   gitdir=`git rev-parse --git-dir`
   [[ -f $gitdir/NO_AUTO_FETCH ]] && return
   (( `date +%s` - `date -r $gitdir/FETCH_LOG +%s 2>/dev/null || echo 0` > $FETCH_INTERVAL_SEC )) && \
-    git fetch --all | tee $gitdir/FETCH_LOG 
+    git fetch --prune --all | tee $gitdir/FETCH_LOG 
 }
 
 function -print-cmd-start-time() {
