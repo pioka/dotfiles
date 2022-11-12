@@ -35,9 +35,6 @@ endif
 noremap t ^
 noremap T $
 
-""" Termモード時、Escでノーマルモードへ
-tnoremap <Esc> <C-\><C-n>
-
 """ Ctrl+Kでノーマルモードへ
 inoremap <C-k> <Esc>
 vnoremap <C-k> <Esc>
@@ -45,6 +42,10 @@ cnoremap <C-k> <C-c>
 
 """ 検索ハイライト解除
 noremap <C-_> :noh<CR>
+
+""" バッファ移動
+noremap <C-n> :bnext<CR>
+noremap <C-p> :bprev<CR>
 
 "" Leaderキー系独自マップ
 let mapleader = "\<Space>"

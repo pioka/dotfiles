@@ -62,3 +62,13 @@ repo = 'neoclide/coc.nvim'
 merged = 0
 rev = 'origin/release'
 
+[[plugins]]
+repo = 'ap/vim-buftabline'
+hook_add = '''
+  let g:buftabline_numbers = 1
+  hi link BufTabLineCurrent CursorLineSign
+  hi link BufTabLineActive CursorLineFold
+  hi link BufTabLineHidden LineNr
+  hi link BufTabLineFill LineNr
+'''
+
