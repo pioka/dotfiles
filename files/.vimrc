@@ -46,6 +46,7 @@ noremap /<CR> :noh<CR>
 """ バッファ移動
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprev<CR>
+noremap <C-h> :bprev \| bdelete#<CR>
 
 "" Leaderキー系独自マップ
 let mapleader = "\<Space>"
@@ -82,6 +83,7 @@ set listchars=tab:→\ ,trail:･,nbsp:･
 set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
+set mouse=a
 
 " TrueColor表示
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
