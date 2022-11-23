@@ -41,7 +41,7 @@ vnoremap <C-k> <Esc>
 cnoremap <C-k> <C-c>
 
 """ 検索ハイライト解除
-noremap <C-_> :noh<CR>
+noremap /<CR> :noh<CR>
 
 """ バッファ移動
 noremap <C-n> :bnext<CR>
@@ -65,9 +65,6 @@ noremap <Leader>o :Fern . -reveal=% -drawer -toggle<CR>
 
 """ grep
 noremap <expr> <Leader>f ':sil grep! ' . substitute(expand('<cword>'), '#', '\\#','g') . ' . \| copen'
-
-""" git-diff開く
-noremap <Leader>gd :Gdiffsplit<CR>
 
 
 " オプションいろいろ

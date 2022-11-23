@@ -1,23 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-  set noshowmode
-  let g:lightline = 
-  \ {
-  \   'active': {
-  \   'left': [['mode', 'paste'],
-  \     ['gitbranch', 'readonly', 'filename', 'modified']]
-  \   },
-  \   'component_function': {
-  \     'gitbranch': 'fugitive#head'
-  \   }
-  \ }
-'''
-
 [[plugins]]
 repo = 'tomasr/molokai'
 hook_add = '''
@@ -38,6 +21,38 @@ repo = 'tpope/vim-fugitive'
 repo = 'cohama/lexima.vim'
 
 [[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  set noshowmode
+  let g:lightline = 
+  \ {
+  \   'active': {
+  \   'left': [['mode', 'paste'],
+  \     ['gitbranch', 'readonly', 'filename', 'modified']]
+  \   },
+  \   'component_function': {
+  \     'gitbranch': 'fugitive#head'
+  \   }
+  \ }
+'''
+
+[[plugins]]
+repo = 'ap/vim-buftabline'
+hook_add = '''
+  let g:buftabline_numbers = 1
+  hi link BufTabLineCurrent CursorLineSign
+  hi link BufTabLineActive CursorLineFold
+  hi link BufTabLineHidden LineNr
+  hi link BufTabLineFill LineNr
+'''
+
+[[plugins]]
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
   let g:fern#default_hidden = 1
@@ -56,19 +71,3 @@ hook_add = '''
 
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
-
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-merged = 0
-rev = 'origin/release'
-
-[[plugins]]
-repo = 'ap/vim-buftabline'
-hook_add = '''
-  let g:buftabline_numbers = 1
-  hi link BufTabLineCurrent CursorLineSign
-  hi link BufTabLineActive CursorLineFold
-  hi link BufTabLineHidden LineNr
-  hi link BufTabLineFill LineNr
-'''
-
