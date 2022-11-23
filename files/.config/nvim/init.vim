@@ -1,6 +1,6 @@
 " deinセットアップ
-let s:dein_path       = expand('~/.local/share/dein.vim')
-let s:dein_repo_path  = expand('~/.local/share/dein.vim/repos/github.com/Shougo/dein.vim')
+let s:dein_path       = expand('~/.cache/dein.vim')
+let s:dein_repo_path  = expand(s:dein_path.'/repos/github.com/Shougo/dein.vim')
 let s:dein_toml_path  = expand('~/.config/dein.vim/dein.toml')
 
 if !isdirectory(s:dein_repo_path)
