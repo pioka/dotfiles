@@ -74,6 +74,7 @@ set shiftwidth=2
 set expandtab
 set laststatus=2
 set hlsearch
+set termguicolors
 set backspace=indent,eol,start
 set cursorline
 set number
@@ -84,11 +85,6 @@ set signcolumn=yes
 set clipboard+=unnamed
 set diffopt+=algorithm:histogram
 set mouse=a
-
-" TrueColor表示
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
 
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --hidden\ --glob='!.git'\ --glob='!.svn'\ $*
