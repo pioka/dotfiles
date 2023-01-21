@@ -14,6 +14,19 @@ if [ ! -f ~/.asdf/asdf.sh ]; then
 fi
 source ~/.asdf/asdf.sh
 
+# nodejs (for coc.nvim)
+if ! node -v > /dev/null; then
+  asdf plugin-add nodejs
+  asdf install nodejs lts
+  asdf global nodejs lts
+fi
+
+# neovim
+if [ ! -x ~/.local/bin/nvim ];then
+  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o ~/.local/bin/nvim
+  chmod +x ~/.local/bin/nvim
+fi
+
 # git-delta
 if [ ! -x ~/.local/bin/delta ]; then
   curl -L https://github.com/dandavison/delta/releases/download/0.12.1/delta-0.12.1-x86_64-unknown-linux-gnu.tar.gz -o ~/.local/bin/delta.tar.gz
@@ -21,7 +34,7 @@ if [ ! -x ~/.local/bin/delta ]; then
 fi
 
 
-# gitconfig.local 
+# git 
 if [ ! -f ~/.gitconfig.local ]; then
   cat << EOS > ~/.gitconfig.local
 [user]
