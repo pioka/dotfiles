@@ -3,7 +3,7 @@ export PATH=~/.local/bin:$PATH
 
 # Aliases & Functions
 ## general
-alias t='tmux attach || tmux'
+alias t='test -n "$TMUX" || tmux attach || tmux'
 alias p='ping -c 10 -i 0.2'
 
 ## ls
