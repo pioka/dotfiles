@@ -18,19 +18,21 @@ if [ ! -f ~/.asdf/asdf.sh ]; then
 fi
 source ~/.asdf/asdf.sh
 
-# neovim
-if [ ! -x ~/.local/bin/nvim ];then
-  curl -L https://github.com/neovim/neovim/releases/download/${V_NVIM}/nvim.appimage -o ~/.local/bin/nvim
-  chmod +x ~/.local/bin/nvim
+# neovim(via asdf)
+if ! nvim -v > /dev/null; then
+  asdf plugin-add neovim
+  asdf install neovim ${V_NVIM}
+  asdf global neovim ${V_NVIM}
 fi
 
-# git-delta
-if [ ! -x ~/.local/bin/delta ]; then
-  curl -L https://github.com/dandavison/delta/releases/download/${V_DELTA}/delta-${V_DELTA}-x86_64-unknown-linux-gnu.tar.gz -o ~/.local/bin/delta.tar.gz
-  tar -xzf ~/.local/bin/delta.tar.gz --wildcards --strip-components=1 -C ~/.local/bin '**/delta' && rm ~/.local/bin/delta.tar.gz
+# delta(via asdf)
+if ! delta -V > /dev/null; then
+  asdf plugin-add delta
+  asdf install delta ${V_DELTA}
+  asdf global delta ${V_DELTA}
 fi
 
-# git 
+# local gitconfig
 if [ ! -f ~/.gitconfig.local ]; then
   cat << EOS > ~/.gitconfig.local
 [user]
