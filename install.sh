@@ -1,10 +1,13 @@
 #!/bin/sh
 
-TARGET_FILES=`find ./files -type f`
+TARGET_FILES=$(find . -type f \
+  -not -path './.git/*' \
+  -not -path './install.sh' \
+  -not -path './README.md')
 
 for src in $TARGET_FILES; do
-  dest="$HOME/`echo $src | sed "s/^.\/files\///" `"
-  mkdir -p `dirname $dest`
+  dest=$(echo $src | sed "s|^./|$HOME/|" )
+  mkdir -p $(dirname $dest)
   cp $src $dest
   echo "$src -> $dest"
 done
