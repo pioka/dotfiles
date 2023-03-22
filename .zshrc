@@ -80,7 +80,7 @@ precmd() {
 }
 
 function _zsh_print_cmd_stats() {
-  test "$_ZSH_CMD_RUNNING" != 1 || return
+  test "$_ZSH_CMD_RUNNING" != 1 && return
 
   local cmd_duration=$(($(date +%s) - ${_ZSH_CMD_STARTED_AT}))
   if [ $cmd_duration = 0 ]; then
@@ -102,15 +102,16 @@ function +vi-git-st() {
 }
 
 ## git: Auto fetch
-## `touch .git/NO_AUTO_FETCH` to disable
 function _zsh_git_auto_fetch() {
   FETCH_INTERVAL_SEC=3600
+  git rev-parse --is-inside-work-tree >& /dev/null || return
 
-  git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
-  gitdir=`git rev-parse --git-dir`
-  [[ -f $gitdir/NO_AUTO_FETCH ]] && return
-  (( `date +%s` - `date -r $gitdir/FETCH_LOG +%s 2>/dev/null || echo 0` > $FETCH_INTERVAL_SEC )) && \
+  local gitdir=`git rev-parse --git-dir`
+  test -f $gitdir/NO_AUTO_FETCH && return
+  if [ $(( $(date +%s) - $(date -r $gitdir/FETCH_LOG +%s 2> /dev/null || echo 0) )) -gt $FETCH_INTERVAL_SEC ]; then
+    echo "Running auto-fetch. \`touch $gitdir/NO_AUTO_FETCH\` to disable."
     git fetch --all | tee $gitdir/FETCH_LOG 
+  fi
 }
 
 source ~/.zsh/init-tools.zsh
