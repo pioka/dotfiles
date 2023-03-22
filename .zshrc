@@ -64,15 +64,30 @@ PROMPT='
 
 # Hooks
 preexec() {
-  -print-cmd-start-time
+  _ZSH_CMD_RUNNING=1
+  _ZSH_CMD_STARTED_AT=$(date +%s)
 }
 
 precmd() {
-  local cmd_status=$?
-  -print-cmd-end-time
-  -git-auto-fetch
+  _ZSH_CMD_STATUS=$?
+  _zsh_print_cmd_stats
+  _ZSH_CMD_RUNNING=0
+  _zsh_git_auto_fetch
   vcs_info
+
+  # Print title bar text
   print -Pn "\e]0;%n@%M:%~\a"
+}
+
+function _zsh_print_cmd_stats() {
+  test "$_ZSH_CMD_RUNNING" != 1 || return
+
+  local cmd_duration=$(($(date +%s) - ${_ZSH_CMD_STARTED_AT}))
+  if [ $cmd_duration = 0 ]; then
+    echo -e "\e[90m>>> returned $_ZSH_CMD_STATUS, took <1s\e[m"
+  else
+    echo -e "\e[90m>>> returned $_ZSH_CMD_STATUS, took ${cmd_duration}s\e[m"
+  fi
 }
 
 ## git: Display ahead/behind
@@ -88,7 +103,7 @@ function +vi-git-st() {
 
 ## git: Auto fetch
 ## `touch .git/NO_AUTO_FETCH` to disable
-function -git-auto-fetch() {
+function _zsh_git_auto_fetch() {
   FETCH_INTERVAL_SEC=3600
 
   git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
@@ -96,18 +111,6 @@ function -git-auto-fetch() {
   [[ -f $gitdir/NO_AUTO_FETCH ]] && return
   (( `date +%s` - `date -r $gitdir/FETCH_LOG +%s 2>/dev/null || echo 0` > $FETCH_INTERVAL_SEC )) && \
     git fetch --all | tee $gitdir/FETCH_LOG 
-}
-
-function -print-cmd-start-time() {
-  _cmd_running=1
-  echo -e "\e[90m<<< $(date '+%Y-%m-%d %H:%M:%S')\e[m"
-}
-
-function -print-cmd-end-time() {
-  if [ "$_cmd_running" = "1" ]; then
-    echo -e "\e[90m>>> $(date '+%Y-%m-%d %H:%M:%S') ($cmd_status)\e[m"
-  fi
-  _cmd_running=0
 }
 
 source ~/.zsh/init-tools.zsh
