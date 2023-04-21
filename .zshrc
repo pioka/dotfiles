@@ -4,6 +4,7 @@ export PATH=~/.local/bin:$PATH
 # Aliases & Functions
 ## general
 alias t='test -n "$TMUX" || tmux attach || tmux'
+if [ -n "$TMUX_AUTO_LAUNCH" ]; then t; fi
 alias p='ping -c 10 -i 0.2'
 
 ## ls
