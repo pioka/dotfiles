@@ -3,7 +3,7 @@ bind generic m none
 bind generic d none
 bind generic t none
 bind generic f none
-bind generic b none
+#bind generic b none # blameは使う
 bind generic r none
 bind generic s none
 bind generic S none
@@ -24,9 +24,17 @@ bind generic 5 view-stash
 # カーソル移動
 bind generic l scroll-right
 bind generic h scroll-left
+bind generic J none
+bind generic K none
 bind generic gg move-first-line
 bind generic G move-last-line
+
+# viewごとの設定
+## main
 bind main G move-last-line
+## diff
+bind diff J :/^@@
+bind diff K :?^@@
 
 # 見た目をいい感じに
 set main-view-id = yes
