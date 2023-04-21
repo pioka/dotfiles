@@ -33,8 +33,8 @@ bind generic G move-last-line
 ## main
 bind main G move-last-line
 ## diff
-bind diff J :/^@@
-bind diff K :?^@@
+bind diff J :/^\+\+\+
+bind diff K :?^\+\+\+
 
 # 見た目をいい感じに
 set main-view-id = yes
