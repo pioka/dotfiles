@@ -1,10 +1,34 @@
-# grep-view使わないのでカーソル移動に当てる
+# view切替系のキーを全部無効化&使うものだけ数字キーで割当
+bind generic m none
+bind generic d none
+bind generic t none
+bind generic f none
+bind generic b none
+bind generic r none
+bind generic s none
+bind generic S none
+bind generic c none
+bind generic y none
 bind generic g none
+bind generic p none
+bind generic h none
+bind generic l none
+
+bind generic 0 view-help
+bind generic 1 view-status 
+bind generic 2 view-main
+bind generic 3 view-tree
+bind generic 4 view-stage
+bind generic 5 view-stash
+
+# カーソル移動
+bind generic l scroll-right
+bind generic h scroll-left
 bind generic gg move-first-line
 bind generic G move-last-line
 bind main G move-last-line
 
-# 見た目とか
+# 見た目をいい感じに
 set main-view-id = yes
 set line-graphics = utf-8
 color cursor white blue bold
