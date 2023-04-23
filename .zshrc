@@ -4,7 +4,6 @@ export PATH=~/.local/bin:$PATH
 # Aliases & Functions
 ## general
 alias t='test -n "$TMUX" || tmux attach || tmux'
-if [ -n "$TMUX_AUTO_LAUNCH" ]; then t; fi
 alias p='ping -c 10 -i 0.2'
 
 ## ls
@@ -64,32 +63,10 @@ PROMPT='
 
 
 # Hooks
-preexec() {
-  _ZSH_CMD_RUNNING=1
-  _ZSH_CMD_STARTED_AT=$(date +%s)
-}
+autoload -Uz add-zsh-hook
 
-precmd() {
-  _ZSH_CMD_STATUS=$?
-  _zsh_print_cmd_stats
-  _ZSH_CMD_RUNNING=0
-  _zsh_git_auto_fetch
-  vcs_info
-
-  # Print title bar text
-  print -Pn "\e]0;%n@%M:%~\a"
-}
-
-function _zsh_print_cmd_stats() {
-  test "$_ZSH_CMD_RUNNING" != 1 && return
-
-  local cmd_duration=$(($(date +%s) - ${_ZSH_CMD_STARTED_AT}))
-  if [ $cmd_duration = 0 ]; then
-    echo -e "\e[90m>>> returned $_ZSH_CMD_STATUS, took <1s\e[m"
-  else
-    echo -e "\e[90m>>> returned $_ZSH_CMD_STATUS, took ${cmd_duration}s\e[m"
-  fi
-}
+## vcs_info
+add-zsh-hook precmd vcs_info
 
 ## git: Display ahead/behind
 zstyle ':vcs_info:git*+set-message:*' hooks git-st
@@ -103,16 +80,47 @@ function +vi-git-st() {
 }
 
 ## git: Auto fetch
-function _zsh_git_auto_fetch() {
+add-zsh-hook precmd _precmd_git_auto_fetch
+function _precmd_git_auto_fetch() {
   FETCH_INTERVAL_SEC=3600
   git rev-parse --is-inside-work-tree >& /dev/null || return
 
   local gitdir=`git rev-parse --git-dir`
   test -f $gitdir/NO_AUTO_FETCH && return
   if [ $(( $(date +%s) - $(date -r $gitdir/FETCH_LOG +%s 2> /dev/null || echo 0) )) -gt $FETCH_INTERVAL_SEC ]; then
-    echo "Running auto-fetch. \`touch $gitdir/NO_AUTO_FETCH\` to disable."
+    echo -e "\e[33mRunning auto-fetch. \`touch $gitdir/NO_AUTO_FETCH\` to disable.\e[m"
     git fetch --all | tee $gitdir/FETCH_LOG 
   fi
 }
+
+## print terminal titlebar text
+add-zsh-hook precmd _precmd_print_titlebar_text
+function _precmd_print_titlebar_text() {
+  print -Pn "\e]0;%n@%M:%~\a"
+}
+
+## command stats (preexec)
+add-zsh-hook preexec _preexec_cmd_stats
+function _preexec_cmd_stats() {
+  _ZSH_CMD_RUNNING=1
+  _ZSH_CMD_STARTED_AT=$(date +%s)
+}
+
+## command stats (precmd)
+add-zsh-hook precmd _precmd_cmd_stats
+function _precmd_cmd_stats() {
+  local cmd_status=$?
+
+  test "$_ZSH_CMD_RUNNING" != 1 && return
+  _ZSH_CMD_RUNNING=0
+
+  local cmd_duration=$(($(date +%s) - ${_ZSH_CMD_STARTED_AT}))
+  if [ $cmd_duration = 0 ]; then
+    echo -e "\e[90m>>> returned $cmd_status, took <1s\e[m"
+  else
+    echo -e "\e[90m>>> returned $cmd_status, took ${cmd_duration}s\e[m"
+  fi
+}
+
 
 source ~/.zsh/init-tools.zsh

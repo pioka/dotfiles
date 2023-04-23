@@ -40,3 +40,5 @@ if [ ! -f ~/.gitconfig.local ]; then
 	name = ''
 EOS
 fi
+
+if [ -n "$TMUX_AUTO_LAUNCH" ]; then t; fi
