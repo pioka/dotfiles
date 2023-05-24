@@ -22,6 +22,9 @@ repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  let g:lsp_diagnostics_enabled = 0
+'''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
