@@ -6,14 +6,7 @@ export PATH=~/.local/bin:$PATH
 alias t='test -n "$TMUX" || tmux attach || tmux'
 alias p='ping -c 10 -i 0.2'
 
-## ls
-if [ "`uname -s`" = "Darwin" ]; then
-  ### macOS
-  alias ls='ls -Gh'
-else
-  #### Others
-  alias ls='ls -h --color=auto'
-fi
+alias ls='ls -h --color=auto'
 alias l='ls -CF'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -51,8 +44,8 @@ setopt prompt_subst
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '%B%F{green}+%f%b'
 zstyle ':vcs_info:*' unstagedstr '%B%F{magenta}*%f%b'
-zstyle ':vcs_info:svn:*' formats '[%r:r%i%c%u%m]'
-zstyle ':vcs_info:git:*' formats '[%r:%b%c%u%m]'
+zstyle ':vcs_info:svn:*' formats '[%s:r%i%c%u%m]'
+zstyle ':vcs_info:git:*' formats '[%s:%b%c%u%m]'
 zstyle ':vcs_info:git:*' actionformats '[%r > %b%c%u<%B%F{red}%a%f%%b>%m]'
 
 ## `export PROMPT_HOSTNAME_COLOR=xxx`
@@ -89,7 +82,7 @@ function _precmd_git_auto_fetch() {
   test -f $gitdir/NO_AUTO_FETCH && return
   if [ $(( $(date +%s) - $(date -r $gitdir/FETCH_LOG +%s 2> /dev/null || echo 0) )) -gt $FETCH_INTERVAL_SEC ]; then
     echo -e "\e[33mRunning auto-fetch. \`touch $gitdir/NO_AUTO_FETCH\` to disable.\e[m"
-    git fetch --all | tee $gitdir/FETCH_LOG 
+    git fetch --all | tee $gitdir/FETCH_LOG
   fi
 }
 
