@@ -72,20 +72,6 @@ function +vi-git-st() {
     (( $behind+$ahead )) && hook_com[misc]+=" (-${behind}/+${ahead})"
 }
 
-## git: Auto fetch
-add-zsh-hook precmd _precmd_git_auto_fetch
-function _precmd_git_auto_fetch() {
-  FETCH_INTERVAL_SEC=3600
-  git rev-parse --is-inside-work-tree >& /dev/null || return
-
-  local gitdir=`git rev-parse --git-dir`
-  test -f $gitdir/NO_AUTO_FETCH && return
-  if [ $(( $(date +%s) - $(date -r $gitdir/FETCH_LOG +%s 2> /dev/null || echo 0) )) -gt $FETCH_INTERVAL_SEC ]; then
-    echo -e "\e[33mRunning auto-fetch. \`touch $gitdir/NO_AUTO_FETCH\` to disable.\e[m"
-    git fetch --all | tee $gitdir/FETCH_LOG
-  fi
-}
-
 ## print terminal titlebar text
 add-zsh-hook precmd _precmd_print_titlebar_text
 function _precmd_print_titlebar_text() {

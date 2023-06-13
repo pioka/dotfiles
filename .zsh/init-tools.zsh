@@ -12,6 +12,19 @@ if [ ! -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 fi
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# zsh-syntax-highlighting
+if [ ! -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+fi
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ohmyzsh:git-auto-fetch
+if [ ! -f ~/.zsh/git-auto-fetch/git-auto-fetch.plugin.zsh ]; then
+  mkdir -p ~/.zsh/git-auto-fetch
+  curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git-auto-fetch/git-auto-fetch.plugin.zsh -o ~/.zsh/git-auto-fetch/git-auto-fetch.plugin.zsh
+fi
+source ~/.zsh/git-auto-fetch/git-auto-fetch.plugin.zsh
+
 # asdf
 if [ ! -f ~/.asdf/asdf.sh ]; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b ${V_ASDF}
