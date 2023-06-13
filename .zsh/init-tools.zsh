@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-V_ASDF='v0.8.1'
-V_DELTA='0.12.1'
+V_ASDF='v0.11.3'
+V_DELTA='0.14.0'
 V_NVIM='stable'
 
 mkdir -p ~/.local/bin
