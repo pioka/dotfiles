@@ -1,6 +1,8 @@
 # Add PATH
 export PATH=~/.local/bin:$PATH
 
+
+
 # Aliases & Functions
 ## general
 alias t='test -n "$TMUX" || tmux attach || tmux'
@@ -19,8 +21,12 @@ function show-https-cert() {
   openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
 }
 
+
+
 # Keymap: Emacs
 bindkey -e
+
+
 
 # History
 setopt extended_history
@@ -31,10 +37,12 @@ HISTSIZE=1000
 SAVEHIST=10000
 
 
+
 # Completion
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*:default' menu select=1
+
 
 
 # Display
@@ -55,13 +63,20 @@ PROMPT='
 %# '
 
 
+
 # Hooks
 autoload -Uz add-zsh-hook
 
 ## vcs_info
 add-zsh-hook precmd vcs_info
 
-## git: Display ahead/behind
+## print terminal titlebar text
+add-zsh-hook precmd _precmd_print_titlebar_text
+function _precmd_print_titlebar_text() {
+  print -Pn "\e]0;%n@%M:%~\a"
+}
+
+## display git ahead/behind
 zstyle ':vcs_info:git*+set-message:*' hooks git-st
 function +vi-git-st() {
     local ahead behind
@@ -72,34 +87,7 @@ function +vi-git-st() {
     (( $behind+$ahead )) && hook_com[misc]+=" (-${behind}/+${ahead})"
 }
 
-## print terminal titlebar text
-add-zsh-hook precmd _precmd_print_titlebar_text
-function _precmd_print_titlebar_text() {
-  print -Pn "\e]0;%n@%M:%~\a"
-}
-
-## command stats (preexec)
-add-zsh-hook preexec _preexec_cmd_stats
-function _preexec_cmd_stats() {
-  _ZSH_CMD_RUNNING=1
-  _ZSH_CMD_STARTED_AT=$(date +%s)
-}
-
-## command stats (precmd)
-add-zsh-hook precmd _precmd_cmd_stats
-function _precmd_cmd_stats() {
-  local cmd_status=$?
-
-  test "$_ZSH_CMD_RUNNING" != 1 && return
-  _ZSH_CMD_RUNNING=0
-
-  local cmd_duration=$(($(date +%s) - ${_ZSH_CMD_STARTED_AT}))
-  if [ $cmd_duration = 0 ]; then
-    echo -e "\e[90m>>> returned $cmd_status, took <1s\e[m"
-  else
-    echo -e "\e[90m>>> returned $cmd_status, took ${cmd_duration}s\e[m"
-  fi
-}
 
 
+# tools setup
 source ~/.zsh/init-tools.zsh
