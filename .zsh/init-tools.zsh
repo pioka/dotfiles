@@ -9,7 +9,7 @@ function _zsh_plug_add() {
   plug_dir="$HOME/.zsh/plugins/$1"
   plug_match="${plug_dir}/${2:-*.zsh}"
   test -d "$plug_dir" || git clone "$plug_repo" "$plug_dir"
-  source $(find "$plug_dir" -path "$plug_match" | head -1) || echo "$plug_match match not found"
+  source $(ls $~plug_match | head -1) || echo "$plug_match match not found"
 }
 
 _zsh_plug_add "zsh-users/zsh-syntax-highlighting"
