@@ -3,18 +3,19 @@
 # local bin dir
 mkdir -p ~/.local/bin
 
-# zplug
-if [ ! -f ~/.zplug/init.zsh ]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
-fi
-source ~/.zplug/init.zsh
+# zsh plugins
+function _zsh_plug_add() {
+  plug_repo="https://github.com/$1.git"
+  plug_dir="$HOME/.zsh/plugins/$1"
+  plug_match="${plug_dir}/${2:-*.zsh}"
+  test -d "$plug_dir" || git clone "$plug_repo" "$plug_dir"
+  source $(find "$plug_dir" -path "$plug_match" | head -1) || echo "$plug_match match not found"
+}
 
-zplug "zsh-users/zsh-syntax-highlighting", from:github
-zplug "zsh-users/zsh-autosuggestions", from:github
-zplug "plugins/git-auto-fetch", from:oh-my-zsh
-zplug "plugins/timer", from:oh-my-zsh
-zplug check || zplug install
-zplug load
+_zsh_plug_add "zsh-users/zsh-syntax-highlighting"
+_zsh_plug_add "zsh-users/zsh-autosuggestions"
+_zsh_plug_add "ohmyzsh/ohmyzsh" "plugins/git-auto-fetch/*.zsh"
+_zsh_plug_add "ohmyzsh/ohmyzsh" "plugins/timer/*.zsh"
 
 
 
