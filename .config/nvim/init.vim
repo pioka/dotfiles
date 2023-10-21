@@ -38,15 +38,14 @@ noremap t ^
 noremap T $
 
 "" バッファ操作系
-noremap <C-n> :bnext<CR>
-noremap <C-p> :bprev<CR>
-noremap <C-h> :bprev \| bdelete#<CR>
+noremap <C-j> :bnext<CR>
+noremap <C-k> :bprev<CR>
 
 "" ウィンドウ操作系
 noremap <Leader>- :split<CR><C-w>w
 noremap <Leader><Bar> :vsplit<CR><C-w>w
-noremap <Leader>n <C-w>w
-noremap <Leader>p <C-w>W
+noremap <Leader>j <C-w>w
+noremap <Leader>k <C-w>W
 
 "" QuickFix開閉
 noremap <Leader>co :copen<CR>
