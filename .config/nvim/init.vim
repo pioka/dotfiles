@@ -30,42 +30,30 @@ endif
 
 
 " キーマップ
-"" 汎用
-""" 行頭/行末へ移動
+"" Leaderキー
+let mapleader = "\<Space>"
+
+"" 行頭/行末へ移動
 noremap t ^
 noremap T $
 
-""" Ctrl+Kでノーマルモードへ
-inoremap <C-k> <Esc>
-vnoremap <C-k> <Esc>
-cnoremap <C-k> <C-c>
-
-""" 検索ハイライト解除
-noremap /<CR> :noh<CR>
-
-""" バッファ移動
+"" バッファ操作系
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprev<CR>
 noremap <C-h> :bprev \| bdelete#<CR>
 
-"" Leaderキー系独自マップ
-let mapleader = "\<Space>"
-
-""" ウィンドウ操作系
+"" ウィンドウ操作系
 noremap <Leader>- :split<CR><C-w>w
 noremap <Leader><Bar> :vsplit<CR><C-w>w
 noremap <Leader>n <C-w>w
 noremap <Leader>p <C-w>W
 
-""" QuickFix開閉
+"" QuickFix開閉
 noremap <Leader>co :copen<CR>
 noremap <Leader>cc :cclose<CR>
 
-""" ファイルブラウザ トグル
+"" ファイルブラウザ(Fern) トグル
 noremap <Leader>o :Fern . -reveal=% -drawer -toggle<CR>
-
-""" grep
-noremap <expr> <Leader>f ':sil grep! ' . substitute(expand('<cword>'), '#', '\\#','g') . ' . \| copen'
 
 
 " オプションいろいろ
@@ -86,19 +74,12 @@ set clipboard+=unnamed
 set diffopt+=algorithm:histogram
 set mouse=a
 
-if executable('rg')
-  set grepprg=rg\ --vimgrep\ --hidden\ --glob='!.git'\ --glob='!.svn'\ $*
-else
-  set grepprg=grep\ --exclude-dir=.svn\ --exclude-dir=.git\ -rnI\ $*
-endif
-
 " 全角スペース強調表示
 augroup HighlightZenkakuSpace
   autocmd!
   autocmd VimEnter,ColorScheme * highlight link ZenkakuSpace Error
   autocmd VimEnter * match ZenkakuSpace /　/
 augroup END
-
 
 " 言語カスタム系
 "" Vagrantfileはrubyのシンタックスを使用
