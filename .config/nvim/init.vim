@@ -1,5 +1,8 @@
 " --- vscode-neovim起動時 ---
 if exists('g:vscode')
+  " clipboard共有
+  set clipboard+=unnamed
+
   "" Leaderキー
   let mapleader = "\<Space>"
 
