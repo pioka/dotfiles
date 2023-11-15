@@ -1,22 +1,26 @@
 " --- vscode-neovim起動時 ---
 if exists('g:vscode')
-  " clipboard共有
+  "" clipboard共有
   set clipboard+=unnamed
 
-  "" Leaderキー
+  "" (共通) Leaderキー
   let mapleader = "\<Space>"
 
-  "" 行頭/行末へ移動
+  "" (共通) 行頭/行末へ移動
   noremap t ^
   noremap T $
 
   "" タブ操作系
-  noremap <Leader>j :Tabnext<CR>
-  noremap <Leader>k :Tabprevious<CR>
+  noremap <C-j> :Tabnext<CR>
+  noremap <C-k> :Tabprevious<CR>
 
-  "" https://github.com/vscode-neovim/vscode-neovim/issues/247
-  nnoremap <silent> u :<C-u>call VSCodeNotify('undo')<CR>
-  nnoremap <silent> <C-r> :<C-u>call VSCodeNotify('redo')<CR>
+  "" undo/redoはVSCode側のコマンドを呼び出す
+  noremap u <Cmd>lua require('vscode-neovim').call('undo')<CR>
+  noremap <C-r> <Cmd>lua require('vscode-neovim').call('redo')<CR>
+
+  "" ファイルオープン系
+  noremap <Leader>o <Cmd>lua require('vscode-neovim').call('workbench.view.explorer')<CR>
+  noremap <C-k><C-o> <Cmd>lua require('vscode-neovim').call('workbench.action.files.openFolder')<CR>
 
   finish
 endif
