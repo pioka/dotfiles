@@ -20,7 +20,7 @@ if exists('g:vscode')
 
   "" ファイルオープン系
   noremap <Leader>o <Cmd>lua require('vscode-neovim').call('workbench.view.explorer')<CR>
-  noremap <C-k><C-o> <Cmd>lua require('vscode-neovim').call('workbench.action.files.openFolder')<CR>
+  noremap <Leader>ko <Cmd>lua require('vscode-neovim').call('workbench.action.files.openFolder')<CR>
 
   finish
 endif
