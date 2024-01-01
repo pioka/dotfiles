@@ -18,6 +18,8 @@
 	rebase = true
 [diff]
 	algorithm = histogram
+[submodule]
+	recurse = true
 
 # git-lfs
 [filter "lfs"]
