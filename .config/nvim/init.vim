@@ -11,8 +11,8 @@ if exists('g:vscode')
   noremap T $
 
   "" タブ操作系
-  noremap <C-j> :Tabnext<CR>
-  noremap <C-k> :Tabprevious<CR>
+  noremap <C-n> :Tabnext<CR>
+  noremap <C-p> :Tabprevious<CR>
 
   "" undo/redoはVSCode側のコマンドを呼び出す
   noremap u <Cmd>lua require('vscode-neovim').call('undo')<CR>
@@ -68,14 +68,14 @@ noremap t ^
 noremap T $
 
 "" バッファ操作系
-noremap <C-j> :bnext<CR>
-noremap <C-k> :bprev<CR>
+noremap <C-n> :bnext<CR>
+noremap <C-p> :bprev<CR>
 
 "" ウィンドウ操作系
 noremap <Leader>- :split<CR><C-w>w
 noremap <Leader><Bar> :vsplit<CR><C-w>w
-noremap <Leader>j <C-w>w
-noremap <Leader>k <C-w>W
+noremap <Leader>n <C-w>w
+noremap <Leader>p <C-w>W
 
 "" QuickFix開閉
 noremap <Leader>co :copen<CR>
