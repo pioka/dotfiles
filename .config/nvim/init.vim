@@ -11,8 +11,8 @@ if exists('g:vscode')
   noremap T $
 
   "" タブ操作系
-  noremap <C-n> :Tabnext<CR>
-  noremap <C-p> :Tabprevious<CR>
+  noremap <Leader>n :Tabnext<CR>
+  noremap <Leader>p :Tabprevious<CR>
 
   "" undo/redoはVSCode側のコマンドを呼び出す
   noremap u <Cmd>lua require('vscode-neovim').call('undo')<CR>
@@ -22,6 +22,9 @@ if exists('g:vscode')
   noremap <Leader>o <Cmd>lua require('vscode-neovim').call('workbench.view.explorer')<CR>
   noremap <Leader>ko <Cmd>lua require('vscode-neovim').call('workbench.action.files.openFolder')<CR>
 
+  "" QuickOpen系
+  noremap <Leader>p <Cmd>lua require('vscode-neovim').call('workbench.action.quickOpen')<CR>
+  noremap <Leader>P <Cmd>lua require('vscode-neovim').call('workbench.action.showCommands')<CR>
   finish
 endif
 
