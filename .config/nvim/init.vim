@@ -1,7 +1,7 @@
 " --- vscode-neovim起動時 ---
 if exists('g:vscode')
   "" clipboard共有
-  set clipboard+=unnamed
+  set clipboard+=unnamedplus
 
   "" (共通) Leaderキー
   let mapleader = "\<Space>"
@@ -102,7 +102,7 @@ set hidden
 set list
 set listchars=tab:→\ ,trail:･,nbsp:･
 set signcolumn=yes
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 set diffopt+=algorithm:histogram
 set mouse=a
 
