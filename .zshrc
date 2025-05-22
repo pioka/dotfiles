@@ -33,8 +33,8 @@ setopt extended_history
 setopt share_history
 setopt hist_ignore_dups
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=10000
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 
 
