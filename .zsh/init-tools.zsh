@@ -20,11 +20,9 @@ _zsh_plug_add "ohmyzsh/ohmyzsh" "plugins/timer/*.zsh"
 
 
 # asdf
-if [ ! -f ~/.asdf/asdf.sh ]; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf -b 'v0.13.1'
+if [ ! -f ~/.local/bin/asdf ]; then
+  curl -fsSL https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz | tar -xz -C ~/.local/bin
 fi
-source ~/.asdf/asdf.sh
-
 
 
 
@@ -34,7 +32,8 @@ if [ ! -f ~/.tool-versions ]; then
 neovim stable
 delta 0.14.0
 EOS
-  cut -d' ' -f1 ~/.tool-versions | xargs -I{} asdf plugin-add {}
+  cut -d' ' -f1 ~/.tool-versions | xargs -I{} asdf plugin add {}
+  asdf install
 fi
 
 if [ ! -f ~/.gitconfig.local ]; then
