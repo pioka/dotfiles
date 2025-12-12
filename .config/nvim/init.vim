@@ -87,6 +87,9 @@ noremap <Leader>cc :cclose<CR>
 "" ファイルブラウザ(Fern) トグル
 noremap <C-n> :Fern . -reveal=% -drawer -toggle<CR>
 
+"" \r削除
+noremap <Leader>r :%s/\r//<CR>
+
 
 " オプションいろいろ
 set tabstop=2
