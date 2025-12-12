@@ -23,6 +23,7 @@ _zsh_plug_add "ohmyzsh/ohmyzsh" "plugins/timer/*.zsh"
 if [ ! -f ~/.local/bin/asdf ]; then
   curl -fsSL https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz | tar -xz -C ~/.local/bin
 fi
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 
 
