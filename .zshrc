@@ -17,6 +17,37 @@ alias la='ls -A'
 alias nview='nvim -R'
 alias nvimdiff='nvim -d'
 
+## claude --dangerously-skip-permissions with sandbox
+function claude-sp() {
+  (exec bwrap --new-session --die-with-parent --unshare-all --share-net \
+    --dev /dev \
+    --proc /proc \
+    --dir /var \
+    --dir /tmp \
+    --ro-bind /usr /usr \
+    --ro-bind /etc/resolv.conf /etc/resolv.conf \
+    --symlink /tmp /var/tmp \
+    --symlink /usr/lib /lib \
+    --symlink /usr/lib64 /lib64 \
+    --symlink /usr/bin /bin \
+    --symlink /usr/sbin /sbin \
+    --dir /run/user/$(id -u) \
+    --file 3 /etc/passwd \
+    --file 4 /etc/group \
+    --bind "$HOME/.claude" "$HOME/.claude" \
+    --bind "$HOME/.claude.json" "$HOME/.claude.json" \
+    --ro-bind "$HOME/.local" "$HOME/.local" \
+    --ro-bind "$HOME/.asdf" "$HOME/.asdf" \
+    --ro-bind "$HOME/.tool-versions" "$HOME/.tool-versions" \
+    --ro-bind "$HOME/.gitconfig" "$HOME/.gitconfig" \
+    --ro-bind "$HOME/.gitconfig.local" "$HOME/.gitconfig.local" \
+    --chdir "$(pwd)" \
+    --bind "$(pwd)" "$(pwd)" \
+    "$(which claude)" --dangerously-skip-permissions) \
+    3< <(getent passwd $(id -u) 65534) \
+    4< <(getent group $(id -g) 65534)
+}
+
 function show-https-cert() {
   openssl s_client -connect $1:443 -servername $1 < /dev/null | openssl x509 -noout -text
 }
