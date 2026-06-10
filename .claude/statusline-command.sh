@@ -1,16 +1,4 @@
 #!/bin/bash
-progressbar() {
-  width="$1"
-  pct="$2"
-
-  filled_blocks=$((pct * width / 100))
-  empty_blocks=$((width - filled_blocks))
-  bar=""
-  [ "$filled_blocks" -gt 0 ] && printf -v fill "%${filled_blocks}s" && bar="${fill// /#}"
-  [ "$empty_blocks" -gt 0 ] && printf -v pad "%${empty_blocks}s" && bar="${bar}${pad// /.}"
-  echo "$bar"
-}
-
 timeremaining() {
     local to=$1
     local now=$(date +%s)
@@ -40,7 +28,7 @@ five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empt
 five_rst=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 week_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 week_rst=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
-cwd=$(echo "$input" | jq -r '.workspace.current_dir // empty')
+pj_dir=$(echo "$input" | jq -r '.workspace.project_dir // empty')
 
 [ -n "$cw_pct" ] && cw_pct_bar=$(progressbar 10 $cw_pct) || cw_pct_bar=""
 [ -n "$cw_size" ] && cw_size_si=$(numfmt --to=si "$cw_size") || cw_size_si=""
@@ -48,16 +36,17 @@ cwd=$(echo "$input" | jq -r '.workspace.current_dir // empty')
 [ -n "$five_rst" ] && five_rst_fmt=$(timeremaining $five_rst) || five_rst_fmt=""
 [ -n "$week_pct" ] && week_pct_bar=$(progressbar 10 $week_pct) || week_pct_bar=""
 [ -n "$week_rst" ] && week_rst_fmt=$(timeremaining $week_rst) || five_rst_fmt=""
+[ -n "$pj_dir" ] && pj_dir_base=$(basename $pj_dir) || pj_dir_base=""
 
 statusline=""
 statusline+="🤖 ${model:-?} (${effort:-?})"
 statusline+=" | "
-statusline+="🧠 ${cw_pct:-?}% [${cw_pct_bar:-??????????}] ${cw_size_si:-?}"
+statusline+="📁 ${pj_dir_base:-?}"
 statusline+=" | "
-statusline+="⌚ ${five_pct:-?}% [${five_pct_bar:-??????????}] ${five_rst_fmt:-?}"
+statusline+="🧠 ${cw_pct:-?}% - ${cw_size_si:-?}"
 statusline+=" | "
-statusline+="📆 ${week_pct:-?}% [${week_pct_bar:-??????????}] ${week_rst_fmt:-?}"
+statusline+="⌚ ${five_pct:-?}% - ${five_rst_fmt:-?}"
 statusline+=" | "
-statusline+="📁 $(dirs)"
+statusline+="📆 ${week_pct:-?}% - ${week_rst_fmt:-?}"
 
 printf '%s' "$statusline"
