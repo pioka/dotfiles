@@ -81,8 +81,8 @@ if [ -n "$week_cycle_rst" ] && [ -n "$week_usage_pct" ]; then
   week_cycle_remaining_fmt=$(fmt_duration "$week_cycle_remaining")
 
   # 1wリミット: 使用量がリセット周期に対する経過時間の割合を上回っていたら警告表示
-  if [ "$(( week_usage_pct * 5 / 7 ))" -gt "$week_cycle_pct" ]; then
-  #if [ "$week_usage_pct" -gt "$week_cycle_pct" ]; then     # 週7日稼働する人向けの設定
+  #if [ "$(( week_usage_pct * 5 / 7 ))" -gt "$week_cycle_pct" ]; then     # 週5日稼働向けの設定
+  if [ "$week_usage_pct" -gt "$week_cycle_pct" ]; then
     week_usage_pct_fmt="${COLOR_YELLOW}${week_usage_pct}%${COLOR_RESET}"
   else
     week_usage_pct_fmt="${week_usage_pct}%"
