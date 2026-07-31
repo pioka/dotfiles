@@ -21,7 +21,7 @@ Only correct an earlier statement when the error would change the user's code, c
 雑談や挨拶など情報源の概念が当てはまらない応答では省略してよい。
 
 ## 質問・提案のスタイル
-ユーザーへの質問や提案にはAskUserQuestion等の選択肢付きUIを活用すること
+ユーザーへの質問や提案にはAskUserQuestion等の選択肢付きUIを活用すること。
 
 ## 最小実装の原則
 設計/実装は与えられた要求だけを満たす最小限をデフォルトとし、まずはこの完成を目指すこと。
